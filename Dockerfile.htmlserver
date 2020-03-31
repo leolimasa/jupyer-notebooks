@@ -1,0 +1,14 @@
+FROM ubuntu:bionic
+
+RUN apt-get update && apt-get install -y \
+  nginx \
+  cron
+
+RUN mkdir /jupyter-notebooks
+COPY . /jupyter-notebooks/ 
+
+RUN sh /jupyter-notebooks/docker/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/anaconda
+RUN ln -s /opt/anaconda/bin/conda /usr/bin/conda
+
+# RUN sh /jupyter-notebooks/scripts/setup.sh
+
